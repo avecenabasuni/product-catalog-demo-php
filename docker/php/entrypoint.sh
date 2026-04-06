@@ -19,6 +19,15 @@ fi
 
 php -r '$env = file_exists(".env") ? file_get_contents(".env") : ""; $replacements = ["DB_CONNECTION=mysql" => "DB_CONNECTION=sqlite", "# DB_DATABASE=laravel" => "DB_DATABASE=/var/www/html/database/database.sqlite", "DB_HOST=127.0.0.1" => "# DB_HOST=127.0.0.1", "DB_PORT=3306" => "# DB_PORT=3306", "DB_DATABASE=laravel" => "DB_DATABASE=/var/www/html/database/database.sqlite", "DB_USERNAME=root" => "# DB_USERNAME=root", "DB_PASSWORD=" => "# DB_PASSWORD=", "APP_URL=http://localhost" => "APP_URL=http://localhost:8080"]; foreach ($replacements as $from => $to) { $env = str_replace($from, $to, $env); } file_put_contents(".env", $env);'
 
+mkdir -p routes
+mkdir -p app/Models
+mkdir -p app/Http/Controllers
+mkdir -p database/migrations
+mkdir -p database/seeders
+mkdir -p resources/views/layouts
+mkdir -p resources/views/products
+mkdir -p resources/views/admin/products/partials
+
 cp -f /opt/stubs/routes/web.php routes/web.php
 cp -f /opt/stubs/app/Models/Product.php app/Models/Product.php
 cp -f /opt/stubs/app/Http/Controllers/ProductController.php app/Http/Controllers/ProductController.php
@@ -32,7 +41,6 @@ cp -f /opt/stubs/resources/views/products/show.blade.php resources/views/product
 cp -f /opt/stubs/resources/views/admin/products/index.blade.php resources/views/admin/products/index.blade.php
 cp -f /opt/stubs/resources/views/admin/products/create.blade.php resources/views/admin/products/create.blade.php
 cp -f /opt/stubs/resources/views/admin/products/edit.blade.php resources/views/admin/products/edit.blade.php
-mkdir -p resources/views/admin/products/partials
 cp -f /opt/stubs/resources/views/admin/products/partials/form.blade.php resources/views/admin/products/partials/form.blade.php
 
 php artisan key:generate --force
