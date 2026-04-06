@@ -28,6 +28,13 @@ mkdir -p resources/views/layouts
 mkdir -p resources/views/products
 mkdir -p resources/views/admin/products/partials
 
+# Ensure storage directories exist and are writable by PHP-FPM (www-data)
+mkdir -p storage/framework/{sessions,views,cache}
+mkdir -p storage/logs
+mkdir -p bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache database
+chmod -R 775 storage bootstrap/cache database
+
 cp -f /opt/stubs/routes/web.php routes/web.php
 cp -f /opt/stubs/app/Models/Product.php app/Models/Product.php
 cp -f /opt/stubs/app/Http/Controllers/ProductController.php app/Http/Controllers/ProductController.php
