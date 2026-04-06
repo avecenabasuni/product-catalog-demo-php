@@ -1,4 +1,5 @@
-FROM php:8.3-fpm
+ARG PHP_IMAGE=php:8.3-fpm
+FROM ${PHP_IMAGE}
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
